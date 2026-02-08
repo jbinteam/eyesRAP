@@ -57,8 +57,7 @@ parameters:
 objects:
   - "/path/to/realityscan/models/object_01.ply"
   - "/path/to/realityscan/models/object_02.ply"
-
-
+```
 ## 🏃 Usage
 
 1.  **Configure the script**:
@@ -88,3 +87,5 @@ output_dir/
     ├── object_name_mask_0000.png
     ├── object_name_mask_0001.png
     └── ...
+```
+
