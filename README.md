@@ -57,3 +57,34 @@ parameters:
 objects:
   - "/path/to/realityscan/models/object_01.ply"
   - "/path/to/realityscan/models/object_02.ply"
+
+
+## 🏃 Usage
+
+1.  **Configure the script**:
+    Open `config.yaml` and set your paths for `output_dir` (where results go), `bg_dir` (where background images are), and the list of `.ply` objects you want to process.
+
+2.  **Run the generator**:
+    Execute the script using Blender's command line in background mode (headless):
+
+    ```bash
+    blender -b -P generator.py
+    ```
+
+    * `-b`: Runs Blender in background mode (no interface).
+    * `-P`: Executes the specified Python script.
+
+## 📂 Output Structure
+
+After running the script, your output directory will be organized as follows:
+
+```text
+output_dir/
+├── images/                 # The augmented RGB images
+│   ├── object_name_0000.png
+│   ├── object_name_0001.png
+│   └── ...
+└── masks/                  # The corresponding binary segmentation masks
+    ├── object_name_mask_0000.png
+    ├── object_name_mask_0001.png
+    └── ...
