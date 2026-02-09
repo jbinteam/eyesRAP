@@ -58,35 +58,62 @@ objects:
   - "/path/to/realityscan/models/object_01.ply"
   - "/path/to/realityscan/models/object_02.ply"
 ```
-## 🏃 Usage
 
-1.  **Configure the script**:
-    Open `config.yaml` and set your paths for `output_dir` (where results go), `bg_dir` (where background images are), and the list of `.ply` objects you want to process.
+## 🏃 Usage / Pipeline
 
-2.  **Run the generator**:
-    Execute the script using Blender's command line in background mode (headless):
+### 1. Configure the script
+Open `config.yaml` and set your paths for `output_dir` (where results go), `bg_dir` (where background images are), and the list of `.ply` objects you want to process.
 
+### 2. Run the generator (Blender)
+Execute the script using Blender's command line in background mode (headless):
+
+```bash
+blender -b -P dataset_generator.py
+```
+
+### 3. Create YOLO Labels
+Convert the Blender-generated binary masks into YOLOv8 Segmentation format (normalized polygons). This script scans the output directory and generates `.txt` labels next to your images.
+
+* **Command:** `python create_yolo_labels.py`
+* **Output:** Creates a `labels` folder containing class IDs and normalized coordinates.
+
+### 4. Verify Labels
+Visually check that the labels align perfectly with the objects using the visualization tool.
+
+* **Command:** `python check_labels.py`
+* **Controls:** `SPACE` (Next Image), `Q` (Quit).
+
+### 5. Generate Training Configuration
+Run the helper script to automatically scan your dataset folders and generate the `custom_data.yaml` file required for YOLO training.
+
+* **Configuration:**
+    * Open `create_dataset_yaml.py` and ensure `ROOT_DIR` points to your dataset folder.
+* **Command:**
     ```bash
-    blender -b -P dataset_generator.py
+    python create_dataset_yaml.py
     ```
-
-    * `-b`: Runs Blender in background mode (no interface).
-    * `-P`: Executes the specified Python script.
+* **Output:** A file named `custom_data.yaml` containing the paths to your training images and class names.
 
 ## 📂 Output Structure
 
 After running the script, your output directory will be organized as follows:
 
 ```text
-output_dir/
-├── images/                 # The augmented RGB images
-│   ├── object_name_0000.png
-│   ├── object_name_0001.png
-│   └── ...
-└── masks/                  # The corresponding binary segmentation masks
-    ├── object_name_mask_0000.png
-    ├── object_name_mask_0001.png
-    └── ...
+ply_model/
+├── object_name/                # Folder for each specific object (e.g., "emergency")
+│   ├── object_name.ply         # The original 3D model
+│   └── augmented/              # Generated dataset for this object
+│       ├── images/             # RGB Images for training
+│       │   ├── object_name_0000.png
+│       │   └── ...
+│       ├── masks/              # Binary Masks (Intermediate step)
+│       │   ├── object_name_mask_0000.png
+│       │   └── ...
+│       └── labels/             # YOLOv8 Segmentation Labels (.txt)
+│           ├── object_name_0000.txt
+│           └── ...
+├── custom_data.yaml            # Auto-generated configuration for training
+└── classes.txt                 # Reference list of Class IDs to Object Names
 ```
 
 ## 🔧 Helper Tools
@@ -115,5 +142,5 @@ Raw `.ply` files exported from RealityScan often appear extremely dark or "flat"
         ```bash
         python mesh_vis.py
         ```
-    * *Note: To save the corrected model to a new file, uncomment the `o3d.io.write_triangle_mesh` line in the script.*
+    * *Note: To save the corrected model to a new file, uncomment the `o3d.io.write_triangle_mesh` line in the script.* 
 
