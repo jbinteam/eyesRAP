@@ -89,3 +89,31 @@ output_dir/
     └── ...
 ```
 
+## 🔧 Helper Tools
+
+### Mesh Visualizer (`mesh_vis.py`)
+
+Raw `.ply` files exported from RealityScan often appear extremely dark or "flat" in 3D viewers. This is usually because they lack vertex normals and store colors in Linear space rather than sRGB. 
+
+`mesh_vis.py` is a standalone Python utility included to inspect your models before processing.
+
+**Capabilities:**
+* **Auto-Exposure**: Automatically detects the brightest pixel and normalizes the mesh brightness.
+* **Gamma Correction**: Converts colors from Linear Space (dark) to sRGB (monitor standard).
+* **Normal Calculation**: Computes missing vertex normals to enable proper lighting and shading.
+
+**Usage:**
+
+1.  **Install Dependencies** (This runs outside Blender, requires standard Python):
+    ```bash
+    pip install open3d numpy
+    ```
+
+2.  **Configure & Run**:
+    * Open `mesh_vis.py` and update the `INPUT_FILE` variable with the path to your `.ply` model.
+    * Run the script:
+        ```bash
+        python mesh_vis.py
+        ```
+    * *Note: To save the corrected model to a new file, uncomment the `o3d.io.write_triangle_mesh` line in the script.*
+
