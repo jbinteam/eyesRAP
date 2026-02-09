@@ -1,0 +1,4 @@
+path: /home/jb/dataset_generator/ply_model
+train: [/home/jb/dataset_generator/ply_model/emergency/augmented/images]
+val: [/home/jb/dataset_generator/ply_model/emergency/augmented/images]
+names: {0: emergency}

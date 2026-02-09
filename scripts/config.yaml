@@ -4,13 +4,13 @@ dataset:
   # Folder containing background images
   bg_dir: "/home/jb/synthesis_dataset/bg_dataset/VOC2012_test/VOC2012_test/JPEGImages"
   # Number of images to generate PER OBJECT
-  img_count: 10
+  img_count: 100
   # Output resolution [width, height]
   resolution: [640, 480]
 
 parameters:
   # Camera distance: 1.0 = tight fit, 2.5 = far away
-  max_distance_factor: 2.5
+  max_distance_factor: 2.0
   # Soften edges: 0 = sharp, 1-3 = soft edges
   edge_blur_radius: 1.5
   # Background scaling: Randomly scale bg between 1.0x and 2.0x
