@@ -17,10 +17,13 @@ This project provides a Python script for Blender 3.6 that:
 
 ## 🛠 Prerequisites
 
+## 🛠 Prerequisites
+
 * **Blender 3.6 LTS** (or higher)
     * Ensure the `blender` command is added to your system PATH.
 * **Python Dependencies**:
     * `PyYAML` (The script will attempt to install this automatically).
+    * `opencv-python`, `tqdm` (For label generation).
 * **Data**:
     * **3D Models**: `.ply` files exported from RealityScan.
     * **Backgrounds**: [Pascal VOC 2012 Dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) (`JPEGImages` folder).
