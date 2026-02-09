@@ -26,7 +26,7 @@ This project provides a Python script for Blender 3.6 that:
     * `opencv-python`, `tqdm` (For label generation).
 * **Data**:
     * **3D Models**: `.ply` files exported from RealityScan.
-    * **Backgrounds**: [Pascal VOC 2012 Dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) (`JPEGImages` folder).
+    * **Backgrounds**: [Pascal VOC 2012 Dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) (`JPEGImages` folder).    
 
 ## ⚙️ Configuration
 
@@ -77,7 +77,7 @@ blender -b -P dataset_generator.py
 ### 3. Create YOLO Labels
 Convert the Blender-generated binary masks into YOLOv8 Segmentation format (normalized polygons). This script scans the output directory and generates `.txt` labels next to your images.
 
-* **Command:** `python create_yolo_labels.py`
+* **Command:** `python create_yolo-seg_labels.py`
 * **Output:** Creates a `labels` folder containing class IDs and normalized coordinates.
 
 ### 4. Verify Labels
