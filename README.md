@@ -67,7 +67,7 @@ objects:
     Execute the script using Blender's command line in background mode (headless):
 
     ```bash
-    blender -b -P generator.py
+    blender -b -P dataset_generator.py
     ```
 
     * `-b`: Runs Blender in background mode (no interface).
