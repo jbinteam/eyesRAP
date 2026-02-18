@@ -17,8 +17,6 @@ This project provides a Python script for Blender 3.6 that:
 
 ## 🛠 Prerequisites
 
-## 🛠 Prerequisites
-
 * **Blender 3.6 LTS** (or higher)
     * Ensure the `blender` command is added to your system PATH.
 * **Python Dependencies**:
