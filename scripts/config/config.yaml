@@ -1,0 +1,23 @@
+dataset:
+  # Where to save the generated dataset
+  output_dir: "/home/oongking/iRAP/projects/eyesRAP/augmented_dataset"
+  # Folder containing background images
+  bg_dir: "/home/oongking/Documents/Dataset/VOC2012_train_val/VOC2012_train_val/JPEGImages"
+  # Number of images to generate PER OBJECT
+  img_count: 2
+  # Output resolution [width, height]
+  resolution: [640, 480]
+
+parameters:
+  # Camera distance: 1.0 = tight fit, 2.5 = far away
+  max_distance_factor: 2.0
+  # Soften edges: 0 = sharp, 1-3 = soft edges
+  edge_blur_radius: 1.5
+  # Background scaling: Randomly scale bg between 1.0x and 2.0x
+  bg_scale_range: [1.0, 2.0]
+
+# List of PLY files to process
+objects:
+  - "/home/oongking/iRAP/projects/eyesRAP/ply_model/emergency.ply"
+  - "/home/oongking/iRAP/projects/eyesRAP/ply_model/emergency_test.ply"
+  # - "/path/to/another/model.ply"

@@ -1,0 +1,6 @@
+path: /home/oongking/iRAP/projects/eyesRAP/augmented_dataset
+train: [/home/oongking/iRAP/projects/eyesRAP/augmented_dataset/emergency/augmented/images,
+  /home/oongking/iRAP/projects/eyesRAP/augmented_dataset/emergency_test/augmented/images]
+val: [/home/oongking/iRAP/projects/eyesRAP/augmented_dataset/emergency/augmented/images,
+  /home/oongking/iRAP/projects/eyesRAP/augmented_dataset/emergency_test/augmented/images]
+names: {0: emergency, 1: emergency_test}
