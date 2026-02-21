@@ -17,7 +17,7 @@ This project provides a Python script for Blender 3.6 that:
 
 ## 🛠 Prerequisites
 
-* **Blender 3.6 LTS** (or higher)
+* **Blender 3.6 LTS** (Newer version will not contain blender Addon)
     * Ensure the `blender` command is added to your system PATH.
 * **Python Dependencies**:
     * `PyYAML` (The script will attempt to install this automatically).
@@ -67,21 +67,27 @@ Open `config.yaml` and set your paths for `output_dir` (where results go), `bg_d
 
 ### 2. Run the generator (Blender)
 Execute the script using Blender's command line in background mode (headless):
-
-```bash
-blender -b -P dataset_generator.py
-```
-
+* **Command:** 
+    ```
+    blender -b -P 1_dataset_generator.py
+    ```
+* **Output:** Creates a `augmented images and masks`.
 ### 3. Create YOLO Labels
 Convert the Blender-generated binary masks into YOLOv8 Segmentation format (normalized polygons). This script scans the output directory and generates `.txt` labels next to your images.
 
-* **Command:** `python create_yolo-seg_labels.py`
+* **Command:** 
+    ```
+    python 2_create_yolo-seg_labels.py
+    ```
 * **Output:** Creates a `labels` folder containing class IDs and normalized coordinates.
 
 ### 4. Verify Labels
 Visually check that the labels align perfectly with the objects using the visualization tool.
 
-* **Command:** `python check_labels.py`
+* **Command:** 
+    ```
+    python 3_check_labels.py
+    ```
 * **Controls:** `SPACE` (Next Image), `Q` (Quit).
 
 ### 5. Generate Training Configuration
@@ -90,8 +96,8 @@ Run the helper script to automatically scan your dataset folders and generate th
 * **Configuration:**
     * Open `create_dataset_yaml.py` and ensure `ROOT_DIR` points to your dataset folder.
 * **Command:**
-    ```bash
-    python create_dataset_yaml.py
+    ```
+    python 4_create_dataset_yaml.py
     ```
 * **Output:** A file named `custom_data.yaml` containing the paths to your training images and class names.
 
@@ -100,21 +106,38 @@ Run the helper script to automatically scan your dataset folders and generate th
 After running the script, your output directory will be organized as follows:
 
 ```text
-ply_model/
-├── object_name/                # Folder for each specific object (e.g., "emergency")
-│   ├── object_name.ply         # The original 3D model
-│   └── augmented/              # Generated dataset for this object
-│       ├── images/             # RGB Images for training
-│       │   ├── object_name_0000.png
-│       │   └── ...
-│       ├── masks/              # Binary Masks (Intermediate step)
-│       │   ├── object_name_mask_0000.png
-│       │   └── ...
-│       └── labels/             # YOLOv8 Segmentation Labels (.txt)
-│           ├── object_name_0000.txt
-│           └── ...
-├── custom_data.yaml            # Auto-generated configuration for training
-└── classes.txt                 # Reference list of Class IDs to Object Names
+eyesRAP/
+├── augmented_dataset/
+│   ├── object_name/                # Folder for each specific object (e.g., "emergency")
+│   │   └── augmented/              # Generated dataset for this object
+│   │       ├── images/             # RGB Images for training
+│   │       │   ├── object_name_0000.png
+│   │       │   └── ...
+│   │       ├── masks/              # Binary Masks (Intermediate step)
+│   │       │   ├── object_name_mask_0000.png
+│   │       │   └── ...
+│   │       └── labels/             # YOLOv8 Segmentation Labels (.txt)
+│   │           ├── object_name_0000.txt
+│   │           └── ...
+│   └── ...
+│
+├── ply_model/
+│   ├── object_name.ply            # The original 3D model
+│   └── ...
+│
+├── scripts/
+│   ├── config/
+│   │   ├── classes.txt             # Reference list of Class IDs to Object Names
+│   │   ├── config.yaml             # Setting configulation for start process
+│   │   └── custom_data.yaml        # Auto-generated configuration for training
+│   ├── tools/
+│   │   └── mesh_vis.py
+│   ├── 1_dataset_generator.py      # To use blender to activate the augment process
+│   ├── 2_create_yolo-seg_labels.py # To create the YOLO label format
+│   ├── 3_check_labels.py           # To Verify the dataset 
+│   └── 4_create_dataset_yaml.py    # To make the config file for YOLO training
+│ 
+└── README.md   
 ```
 
 ## 🔧 Helper Tools
