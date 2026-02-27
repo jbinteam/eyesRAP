@@ -168,3 +168,24 @@ Raw `.ply` files exported from RealityScan often appear extremely dark or "flat"
         ```
     * *Note: To save the corrected model to a new file, uncomment the `o3d.io.write_triangle_mesh` line in the script.* 
 
+### Smoothen Mesh (`smooth_mash.py`)
+
+Use with `brighted mesh`, the save process of open3d will round up the color so it will save as dark color
+
+`smooth_mash.py` is a standalone Python utility included to smoothen your models before processing.
+
+**Usage:**
+
+1.  **Install Dependencies** (This runs outside Blender, requires standard Python):
+    ```bash
+    pip install open3d numpy
+    ```
+
+2.  **Configure & Run**:
+    * Open `smooth_mash.py` and update the `INPUT_FILE` variable with the path to your `.ply` model.
+    * Run the script:
+        ```bash
+        python smooth_mash.py
+        ```
+    * *Note: To save the corrected model to a new file, uncomment the `o3d.io.write_triangle_mesh` line in the script.* 
+
